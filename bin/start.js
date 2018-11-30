@@ -38,5 +38,5 @@ app.get('*', (req, res) => {
 
 app.listen(config.port, () => {
   console.log(`Listening at http://localhost:${config.port}`)
-  opn(`http://localhost:${config.port}`)
+  // opn(`http://localhost:${config.port}`)
 })

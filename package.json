@@ -17,6 +17,7 @@
     "better-scroll": "^0.1.15",
     "element-ui": "latest",
     "lodash": "^4.17.10",
+    "mescroll.js": "^1.4.0",
     "query-string": "^6.1.0",
     "socket.io-client": "^2.1.1",
     "vue": "latest",

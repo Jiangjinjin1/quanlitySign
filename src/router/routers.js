@@ -9,6 +9,7 @@ export default [
 		redirect: '/quanlitySign'
 	},
 	{
+		name: 'quanlitySign',
 		path: '/quanlitySign',
 		component: QuanlitySign,
 		meta: {
@@ -17,6 +18,7 @@ export default [
 		}
 	},
 	{
+		name: 'signDetail',
 		path: '/signDetail',
 		component: SignDetail,
 		meta: {

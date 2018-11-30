@@ -6,6 +6,7 @@ import {
 	Input
 } from 'element-ui'
 import infiniteScroll from 'vue-infinite-scroll'
+import MescrollVue from 'mescroll.js/mescroll.vue'
 import _ from 'lodash'
 import Icon from 'vue-svg-icon/Icon.vue'
 // import VueSocketio from 'vue-socket.io'
@@ -32,6 +33,7 @@ for (let i = 0, len = UIComponents.length; i < len; i++) {
 	Vue.component(UIComponents[i].name, UIComponents[i])
 }
 Vue.component('icon', Icon)
+Vue.component('MescrollVue', MescrollVue)
 
 Vue.prototype.$message = Message
 Vue.prototype._ = _

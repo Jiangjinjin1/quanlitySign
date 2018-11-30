@@ -3,7 +3,8 @@ import {
 	SOCKET_USER_MESSAGE,
 	LOG_OUT,
 	SHOW_USER_JOIN,
-	SHOW_USER_LEAVE
+	SHOW_USER_LEAVE,
+	RECORD_ORDER_DETAIL
 } from './mutation-types'
 import {Message as $message} from 'element-ui'
 
@@ -16,6 +17,10 @@ const messageTip = (groupInfo) => {
 }
 
 export default {
+	[RECORD_ORDER_DETAIL] (state, orderDetail) {
+		state.orderDetail = orderDetail
+	},
+
 	[SET_USER_INFO] (state, userInfo) {
 		state.userInfo = userInfo
 	},
