@@ -27,7 +27,7 @@
 <script>
 import {mapState, mapMutations} from 'vuex'
 import ui from '../../modules/ui/ui'
-import {getSignList} from '../../service/signApi'
+import {getSignList, confirmSign} from '../../service/signApi'
 import signlistview from '../../components/signlistview'
 
 export default {
@@ -69,88 +69,30 @@ export default {
     next()
   },
 
-  created() {
-    console.log('addressId:', this.$route)
-  },
-
 	components: {
     signlistview,
-	},
+  },
+  
+  created() {
+    const addressId = this.$route.params.addressId || ''
+    this.RECORD_ORDER_ADDRESS_ID(addressId)
+  },
 
 	methods: {
+    ...mapMutations(['RECORD_ORDER_ADDRESS_ID']),
+
     mescrollInit (mescroll) {
       this.mescroll = mescroll
     },
     async upCallback (page, mescroll) {
-      // const arr = await getSignList({}).catch((e)=>{
-      //   // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
-      //   mescroll.endErr()
-      // })
-      const arr = [{
-        waybillNo: '17834767389',
-        status: '1',
-        schoolName: '上海第二外语中学',
-        schoolAddress: '桂平路418号',
-        road: '黄埔外',
-        psTime: '11-29',
-      },{
-        waybillNo: '17834767389',
-        status: '2',
-        schoolName: '上海第二外语中学',
-        schoolAddress: '桂平路418号',
-        road: '黄埔外',
-        psTime: '11-29',
-      },{
-        waybillNo: '17834767389',
-        status: '3',
-        schoolName: '上海第二外语中学',
-        schoolAddress: '桂平路418号',
-        road: '黄埔外',
-        psTime: '11-29',
-      },{
-        waybillNo: '17834767389',
-        status: '1',
-        schoolName: '上海第二外语中学',
-        schoolAddress: '桂平路418号',
-        road: '黄埔外',
-        psTime: '11-29',
-      },{
-        waybillNo: '17834767389',
-        status: '2',
-        schoolName: '上海第二外语中学',
-        schoolAddress: '桂平路418号',
-        road: '黄埔外',
-        psTime: '11-29',
-      },{
-        waybillNo: '17834767389',
-        status: '3',
-        schoolName: '上海第二外语中学',
-        schoolAddress: '桂平路418号',
-        road: '黄埔外',
-        psTime: '11-29',
-      },{
-        waybillNo: '17834767389',
-        status: '1',
-        schoolName: '上海第二外语中学',
-        schoolAddress: '桂平路418号',
-        road: '黄埔外',
-        psTime: '11-29',
-      },{
-        waybillNo: '17834767389',
-        status: '2',
-        schoolName: '上海第二外语中学',
-        schoolAddress: '桂平路418号',
-        road: '黄埔外',
-        psTime: '11-29',
-      },{
-        waybillNo: '17834767389',
-        status: '3',
-        schoolName: '上海第二外语中学',
-        schoolAddress: '桂平路418号',
-        road: '黄埔外',
-        psTime: '11-29',
-      }]
-
+      const arr = await getSignList({
+        page: page.num,
+        destcode: this.$route.params.addressId || '',
+      }).catch((e)=>{
+        // 联网失败的回调,隐藏下拉刷新和上拉加载的状态;
+        mescroll.endErr()
+      }) || []
+      
       if (page.num === 1) this.dataList = []
       this.dataList = this.dataList.concat(arr)
       this.$nextTick(() => {
@@ -166,12 +108,42 @@ export default {
       this.isShowSelect = false
     },
 
-    confirmSignPress() {
+    async confirmSignPress() {
+      const selectedCustomers = this.selectedCustomers || []
 
+      const ids = selectedCustomers.map((oItem) => {
+        return oItem.id
+      }).join(',')
+
+      const result = await confirmSign({
+        type: 'PART',
+        destcode: this.$route.params.addressId, 
+        ids,
+      })
+
+      if(result.success) {
+        ui.toast({title: '', msg: '签收成功'})
+
+        const arr = await getSignList({
+          page: '1',
+          destcode: this.$route.params.addressId || '',
+        })
+        this.dataList = []
+        this.dataList = this.dataList.concat(arr)
+      }
     },
 
-    signAllPress() {
+    async signAllPress() {
+      const result = await confirmSign({
+        type: 'ALL',
+        destcode: this.$route.params.addressId, 
+      })
 
+      if(result.success) {
+        ui.toast({title: '', msg: '全部签收成功'})
+
+        this.dataList = []
+      }
     },
 
     acceptSelectItems(item) {
@@ -185,7 +157,6 @@ export default {
         newData.splice(index, 1)
       }
       this.selectedCustomers = newData
-      console.log('this.selectedCustomers:',this.selectedCustomers)
     },
 
 	}

@@ -10,6 +10,8 @@ Vue.use(Vuex)
 
 const state = {
 	orderDetail: {}, // 订单详情
+	addressId: '', // 地址id
+
 	userInfo: {},
 	chatMessages: [], // 聊天信息
 	groupUsersInfo: {} // 群用户信息
@@ -25,7 +27,8 @@ export default new Vuex.Store({
 		paths: [
 			'userInfo',
 			'chatMessages',
-			'orderDetail'
+			'orderDetail',
+			'addressId'
 		]
 	})],
 	modules: {

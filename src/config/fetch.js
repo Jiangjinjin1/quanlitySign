@@ -26,7 +26,7 @@ instance.interceptors.request.use(function (config) {
 instance.interceptors.response.use(function (response) {
 	const newResponse = response.data
 	ui.hideLoading()
-	if (newResponse.code !== 0) {
+	if (!newResponse.success) {
 		ui.toast({title: '', msg: newResponse.msg})
 		return Promise.reject(newResponse.msg)
 	}
@@ -138,7 +138,7 @@ export default function post (params) {
 	return new Promise((resolve, reject) => {
 		instance.post(url, queryString.stringify(data))
 			.then(response => {
-				resolve(response.data)
+				resolve(response)
 			}, err => {
 				reject(err)
 			})

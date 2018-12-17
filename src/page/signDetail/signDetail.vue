@@ -6,22 +6,24 @@
 					<div class="backClass" @click="goBack">	
 						<icon name="backBlack" class="backClassIcon"/>
 					</div>
-					<div class="sign1_1">签收单号：{{orderInfo.waybillNo}}</div>
+					<div class="sign1_1">签收单号：{{''}}</div>
 				</div>
         <div :class="['sign1_2',stausStyle]">{{signStatus}}</div>
       </div>
       <div class="lineSpace"></div>
-      <div class="sign2">学校名称：{{orderInfo.schoolName}}</div>
-      <div class="sign3">学校地址：{{orderInfo.schoolAddress}}</div>
+      <div class="sign2">学校名称：{{orderInfo.destname}}</div>
+      <div class="sign3">学校地址：{{orderInfo.addr}}</div>
+      <div class="sign3">收件人：{{orderInfo.receiver}}</div>
+      <div class="sign3">联系电话：{{orderInfo.phone}}</div>
       <div class="lineSpace"></div>
       <div class="sign4">
         <div class="sing4_1">
           <img src="../../images/sign04.png" alt="">
-          <div>路线：{{orderInfo.road}}</div>
+          <div>路线：{{orderInfo.route}}</div>
         </div>
         <div class="sing4_2">
           <img src="../../images/sign03.png" alt="">
-          <div>路线：{{orderInfo.psTime}}</div>
+          <div>路线：{{orderInfo.dispdate}}</div>
         </div>
       </div>
     </div>
@@ -32,6 +34,7 @@
 <script>
 import {mapState} from 'vuex'
 import ui from '../../modules/ui/ui'
+import {confirmSign} from '../../service/signApi'
 
 export default {
 	data () {
@@ -43,26 +46,25 @@ export default {
 
 	created() {
 		this.initData()
-		console.log('this.$route:', this.$route)
 	},
 
 	computed: {
-		...mapState(['orderDetail']),
+		...mapState(['orderDetail', 'addressId']),
 
 		signStatus() {
 			const orderInfo = this.orderInfo
-			if(orderInfo.status === '1') {
+			if(orderInfo.state === '0') {
 				this.stausStyle = 'sign1_2_1'
-				return '进行中'
+				return '未签收'
 			}
-			if(orderInfo.status === '2') {
+			if(orderInfo.state === '1') {
 				this.stausStyle = 'sign1_2_2'
 				return '已签收'
 			}
-			if(orderInfo.status === '3') {
-				this.stausStyle = 'sign1_2_3'
-				return '签收延误'
-			}
+			// if(orderInfo.state === '3') {
+			// 	this.stausStyle = 'sign1_2_3'
+			// 	return '签收延误'
+			// }
 		},
 	},
 
@@ -76,8 +78,17 @@ export default {
 			this.orderInfo = this.orderDetail
 		},
 
-		confirmSignPress() {
+		async confirmSignPress() {
+      const result = await confirmSign({
+        type: 'PART',
+        destcode: this.addressId, 
+        ids: this.orderInfo.id || '',
+      })
 
+      if(result.success) {
+        ui.toast({title: '', msg: '签收成功'})
+        this.$router.go(-1)
+      }
 		},
 		
 		goBack() {

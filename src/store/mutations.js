@@ -4,7 +4,8 @@ import {
 	LOG_OUT,
 	SHOW_USER_JOIN,
 	SHOW_USER_LEAVE,
-	RECORD_ORDER_DETAIL
+	RECORD_ORDER_DETAIL,
+	RECORD_ORDER_ADDRESS_ID
 } from './mutation-types'
 import {Message as $message} from 'element-ui'
 
@@ -19,6 +20,10 @@ const messageTip = (groupInfo) => {
 export default {
 	[RECORD_ORDER_DETAIL] (state, orderDetail) {
 		state.orderDetail = orderDetail
+	},
+
+	[RECORD_ORDER_ADDRESS_ID] (state, addressId) {
+		state.addressId = addressId
 	},
 
 	[SET_USER_INFO] (state, userInfo) {

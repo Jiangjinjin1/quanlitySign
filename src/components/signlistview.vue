@@ -5,21 +5,21 @@
     </div>
     <div class="signContent" @click="toSignDetail(orderInfo)">
       <div class="sign1">
-        <div class="sign1_1">签收单号：{{orderInfo.waybillNo}}</div>
+        <div class="sign1_1">签收单号：{{''}}</div>
         <div :class="['sign1_2',stausStyle]">{{signStatus}}</div>
       </div>
       <div class="lineSpace"></div>
-      <div class="sign2">学校名称：{{orderInfo.schoolName}}</div>
-      <div class="sign3">学校地址：{{orderInfo.schoolAddress}}</div>
+      <div class="sign2">学校名称：{{orderInfo.destname}}</div>
+      <div class="sign3">学校地址：{{orderInfo.addr}}</div>
       <div class="lineSpace"></div>
       <div class="sign4">
         <div class="sing4_1">
           <img src="../images/sign04.png" alt="">
-          <div>路线：{{orderInfo.road}}</div>
+          <div>路线：{{orderInfo.route}}</div>
         </div>
         <div class="sing4_2">
           <img src="../images/sign03.png" alt="">
-          <div>路线：{{orderInfo.psTime}}</div>
+          <div>派送时间：{{orderInfo.dispdate}}</div>
         </div>
       </div>
     </div>
@@ -40,18 +40,18 @@
     computed: {
       signStatus() {
         const orderInfo = this.orderInfo
-        if(orderInfo.status === '1') {
+        if(orderInfo.state === '0' || this._.isEmpty(orderInfo.state)) {
           this.stausStyle = 'sign1_2_1'
-          return '进行中'
+          return '未签收'
         }
-        if(orderInfo.status === '2') {
+        if(orderInfo.state === '1') {
           this.stausStyle = 'sign1_2_2'
           return '已签收'
         }
-        if(orderInfo.status === '3') {
-          this.stausStyle = 'sign1_2_3'
-          return '签收延误'
-        }
+        // if(orderInfo.status === '3') {
+        //   this.stausStyle = 'sign1_2_3'
+        //   return '签收延误'
+        // }
       }
     },
 
