@@ -61,6 +61,8 @@ export default {
   @import "./style/mixin.css";
 
   #app{
+    display: flex;
+    flex: 1;
   @mixin wh 100%,100%;
     overflow-x: hidden;
   }

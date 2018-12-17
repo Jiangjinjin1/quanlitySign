@@ -11,11 +11,9 @@
         <div :class="['sign1_2',stausStyle]">{{signStatus}}</div>
       </div>
       <div class="lineSpace"></div>
-      <div class="sign2">学校名称：{{orderInfo.destname}}</div>
-      <div class="sign3">学校地址：{{orderInfo.addr}}</div>
-      <div class="sign3">收件人：{{orderInfo.receiver}}</div>
-      <div class="sign3">联系电话：{{orderInfo.phone}}</div>
-      <div class="lineSpace"></div>
+      <div class="sign2">学校名称：<span class="sign2span">{{orderInfo.destname}}</span></div>
+      <div class="sign3">学校地址：<span class="sign3span">{{orderInfo.addr}}</span></div>
+      <div class="sign3">书包总数：<span class="sign3span">{{orderInfo.num}}</span></div>
       <div class="sign4">
         <div class="sing4_1">
           <img src="../../images/sign04.png" alt="">
@@ -24,6 +22,23 @@
         <div class="sing4_2">
           <img src="../../images/sign03.png" alt="">
           <div>路线：{{orderInfo.dispdate}}</div>
+        </div>
+      </div>
+      <div class="lineSpaceDashed"></div>
+      <div class="mingxi">
+        <div class="mingxiTitle"><span>明细</span></div>
+        <div class="minxiLiebiao">
+          <div class="minxiLiebiao_1">
+            <div class="minxiLiebiao_1_1 ellipsis">
+              书包名称：<span>外国文献</span>
+            </div>
+            <div class="minxiLiebiao_1_2">2000份</div>
+          </div>
+          <div class="minxiLiebiao_2">
+            <div class="minxiLiebiao_2_1 ellipsis">{{orderInfo.receiver}}</div>
+            <div class="minxiLiebiao_2_2">{{orderInfo.phone}}</div>
+          </div>
+          <div class="lineSpaceDashed"></div>
         </div>
       </div>
     </div>
@@ -168,10 +183,18 @@ export default {
       .sign2{
         padding: .5rem .5rem .5rem 0;
         font-size: .75rem;
+        .sign2span{
+          font-size: .75rem;
+          color: #a2a2a2;
+        }
       }
       .sign3{
         padding: .5rem .5rem .5rem 0;
         font-size: .75rem;
+        .sign3span{
+          font-size: .75rem;
+          color: #a2a2a2;
+        }
       }
       .sign4{
         display: flex;
@@ -200,6 +223,61 @@ export default {
           }
         }
       }
+
+      .mingxi{
+        display: flex;
+        flex-direction: column;
+        margin-top: .5rem;
+        padding-right: .25rem;
+        .mingxiTitle{
+          border-left: .25rem solid #4E92DF;
+          font-size: 0.75rem;
+          span{
+            padding-left: .25rem;
+          }
+        }
+        .minxiLiebiao{
+          display: flex;
+          flex-direction: column;
+
+          .minxiLiebiao_1{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: .25rem 0;
+
+            .minxiLiebiao_1_1{
+              flex: 1;
+              font-size: .75rem;
+              span{
+                font-size: .75rem;
+                color: #a2a2a2;
+              }
+            }
+            .minxiLiebiao_1_2{
+              font-size: 0.75rem;
+              color: #FC5167;
+            }
+          }
+          .minxiLiebiao_2{
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding: .25rem 0;
+            .minxiLiebiao_2_1{
+              flex: 1;
+              font-size: .75rem;
+            }
+            .minxiLiebiao_2_2{
+              font-size: 0.75rem;
+              color: #FC5167;
+            }
+          }
+        }
+      }
+
     }
   }
   

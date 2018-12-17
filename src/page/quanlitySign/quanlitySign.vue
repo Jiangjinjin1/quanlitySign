@@ -142,7 +142,12 @@ export default {
       if(result.success) {
         ui.toast({title: '', msg: '全部签收成功'})
 
+        const arr = await getSignList({
+          page: '1',
+          destcode: this.$route.params.addressId || '',
+        })
         this.dataList = []
+        this.dataList = this.dataList.concat(arr)
       }
     },
 
