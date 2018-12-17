@@ -10,9 +10,9 @@
 export const ENV = process.env.NODE_ENV
 export const DEV = 'development'
 export const PRO = 'production'
-export const devHost = 'localhost:9000'
+export const devHost = 'http://ksudi.wicp.net'
 export const proHost = 'erha.smallerha.com:9000'
-export const devImgUrl = 'localhost:9000'
+export const devImgUrl = 'http://ksudi.wicp.net'
 export const proImgUrl = 'erha.smallerha.com:9000'
 
 const newBaseURLMapping = {

@@ -69,7 +69,9 @@ export default {
     next()
   },
 
-	
+  created() {
+    console.log('addressId:', this.$route)
+  },
 
 	components: {
     signlistview,

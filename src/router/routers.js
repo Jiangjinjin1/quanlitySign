@@ -10,7 +10,7 @@ export default [
 	},
 	{
 		name: 'quanlitySign',
-		path: '/quanlitySign',
+		path: '/quanlitySign/:addressId',
 		component: QuanlitySign,
 		meta: {
 			title: '派送列表',
