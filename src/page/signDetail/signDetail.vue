@@ -13,7 +13,7 @@
       <div class="lineSpace"></div>
       <div class="sign2">学校名称：<span class="sign2span">{{orderInfo.destname}}</span></div>
       <div class="sign3">学校地址：<span class="sign3span">{{orderInfo.addr}}</span></div>
-      <div class="sign3">书包总数：<span class="sign3span">{{orderInfo.num}}</span></div>
+      <div class="sign3">书报总数：<span class="sign3span">{{orderInfo.num}}</span></div>
       <div class="sign4">
         <div class="sing4_1">
           <img src="../../images/sign04.png" alt="">
@@ -30,7 +30,7 @@
         <div class="minxiLiebiao">
           <div class="minxiLiebiao_1">
             <div class="minxiLiebiao_1_1 ellipsis">
-              书包名称：<span>{{orderInfo.goods}}</span>
+              书报名称：<span>{{orderInfo.goods}}</span>
             </div>
             <div class="minxiLiebiao_1_2">{{orderInfo.num}}份</div>
           </div>
