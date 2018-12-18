@@ -30,9 +30,9 @@
         <div class="minxiLiebiao">
           <div class="minxiLiebiao_1">
             <div class="minxiLiebiao_1_1 ellipsis">
-              书包名称：<span>外国文献</span>
+              书包名称：<span>{{orderInfo.goods}}</span>
             </div>
-            <div class="minxiLiebiao_1_2">2000份</div>
+            <div class="minxiLiebiao_1_2">{{orderInfo.num}}份</div>
           </div>
           <div class="minxiLiebiao_2">
             <div class="minxiLiebiao_2_1 ellipsis">{{orderInfo.receiver}}</div>
