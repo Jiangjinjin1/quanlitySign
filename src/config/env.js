@@ -11,9 +11,9 @@ export const ENV = process.env.NODE_ENV
 export const DEV = 'development'
 export const PRO = 'production'
 export const devHost = 'ksudi.wicp.net'
-export const proHost = '106.14.96.84:1030'
+export const proHost = '106.14.246.24'
 export const devImgUrl = 'ksudi.wicp.net'
-export const proImgUrl = '106.14.96.84:1030'
+export const proImgUrl = '106.14.246.24'
 
 const newBaseURLMapping = {
 	[DEV]: `http://${devHost}`,
